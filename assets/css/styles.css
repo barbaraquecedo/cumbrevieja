@@ -1,8 +1,36 @@
 #canvas-game {
-    border: 1px solid gray;
+    border: 1px solid gray;   
+}
+
+h1{
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.game-container{
+    padding: 0;
+    height: 100vh;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    position: relative;
+}
+
+.game-intro{
+    background-color: red;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 600px;
+    height: 400px;
+
 }
 
 * {
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 80px;
+    
 }
