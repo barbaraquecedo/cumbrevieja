@@ -6,7 +6,7 @@ class Background {
     this.ctx = ctx;
 
     this.x = 0;
-    this.y = 434;
+    this.y = 0;
 
     this.vx = 0.2;
 
@@ -22,7 +22,7 @@ class Background {
     }
 
     draw() {
-        this.ctx.drawImage(this.bgImg, 0, 0, this.bgImg.width, this.bgImg.height);
+        this.ctx.drawImage(this.bgImg, this.x, this.y , this.bgImg.width, this.bgImg.height);
         this.ctx.drawImage(this.bgImg, this.x + this.width, this.y, this.bgImg.width, this.bgImg.height);
     }
 

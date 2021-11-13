@@ -8,6 +8,15 @@ window.addEventListener('load', () => {
   const startButton = document.querySelector('#button-start');
   const gameIntro = document.querySelector('.game-intro');
 
+  document.addEventListener('keydown', (event) => {
+    //ejecutar metodo onKeyDown del objeto game pasandole code
+    game.onKeyDown(event.keyCode);
+  })
+
+  document.addEventListener('keyup', (event) => {
+    game.onKeyUp(event.keyCode);
+  })
+
   startButton.addEventListener('click', () => {
     game.start();
     gameIntro.remove();
