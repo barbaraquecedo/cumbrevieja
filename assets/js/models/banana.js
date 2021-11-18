@@ -8,6 +8,7 @@ class Banana {
     this.y =  y;
     this.width = 100;
     this.height = 50;
+    this.vx = 0.2;
     
     this.img = new Image();
     this.img.src = 'assets/img/platano.png';
@@ -17,5 +18,10 @@ class Banana {
     draw(){
 
         this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    }
+
+    move(){
+        this.x += this.vx;
+
     }
 }

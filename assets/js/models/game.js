@@ -5,26 +5,34 @@ class Game {
         this.ctx = this.canvas.getContext("2d");
         this.ctx.font = "30px Arial";
         this.ctx.strokeText("Welcome to Cumbrevieja", 10, 50);
-        
+
         this.drawIntervalId = undefined;
-        this.fps = 1000/60;
+        this.fps = 1000 / 60;
 
         this.background = new Background(this.ctx);
-        this.player = new Player(this.ctx, 150, 250);
+        this.player = new Player(this.ctx, 150, 260);
         this.banana = new Banana(this.ctx, 50, 100);
         this.pet = new Pet(this.ctx, 50, 100);
+        this.lava = new Lava(this.ctx);
+
+        this.lavaIncrease = 0;
     }
 
 
 
 
     start() {
-    if (!this.drawIntervalId) {
-        this.drawIntervalId = setInterval(() => {
-            this.clear();
-            this.draw();
-            this.move();
-            }, this.fps);  
+        if (!this.drawIntervalId) {
+            this.drawIntervalId = setInterval(() => {
+                this.clear();
+                this.draw();
+                this.move();
+                const lavaFactor = this.player.isMovingToRight > 0 ? 400 : 30;
+                if (this.lavaIncrease % lavaFactor === 0) {
+                    this.lavaIncrease = 0;
+                    this.lava.x += 10;
+                }
+            }, this.fps);
         }
     }
 
@@ -38,9 +46,11 @@ class Game {
         this.player.draw();
         this.banana.draw();
         this.pet.draw();
+        this.lava.draw();
+        this.lavaIncrease++;
     }
 
-    move(){
+    move() {
         this.background.move();
         this.player.move();
     }
@@ -52,7 +62,7 @@ class Game {
     onKeyDown(code) {
         this.player.onKeyDown(code);
     }
-    
+
     onKeyUp(code) {
         this.player.onKeyUp(code);
     }

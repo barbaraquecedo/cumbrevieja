@@ -21,6 +21,8 @@ class Player {
         this.img.frameIndex = 0;
         this.img.src = 'assets/img/dodo.png';
 
+        this.isMovingToRight = false;
+
         
         
         this.drawCount = 0;
@@ -41,11 +43,15 @@ class Player {
 
             this.drawCount++;
 
-            if(this.drawCount % 10 === 0){
-                this.img.frameIndex += 1;
+            if (this.drawCount % 15 === 0){
 
-                if(this.img.frameIndex > 2){
-                    this.img.frameIndex = 0;
+                if (this.y < this.y0) {
+                    this.img.frameIndex = 2;
+                } else {
+                    this.img.frameIndex += 1;
+                    if (this.img.frameIndex > 1){
+                        this.img.frameIndex = 0;
+                    }
                 }
             }
             
@@ -83,9 +89,10 @@ class Player {
     onKeyDown(code){
         if(code === KEY_FORWARD) {
             this.vx = 5;
+            this.isMovingToRight = true;
         }
         
-        if (code === KEY_UP) {
+        if (code === KEY_UP && this.y >= this.ctx.canvas.height / 4) {
             this.vy = -5;
         }
 
@@ -99,10 +106,11 @@ class Player {
     onKeyUp(code){
         if(code === KEY_FORWARD) {
             this.vx = 0;
+            this.isMovingToRight = false;
         }
 
         if (code === KEY_UP) {
-            this.vx = 0;
+            this.vy = 0;
         }
 
         if (code === KEY_BACKWARD) {
