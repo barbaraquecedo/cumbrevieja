@@ -9,8 +9,8 @@ class Player {
         this.y = y;
         this.y0 = y;
 
-        this.w = 100;
-        this.h = 100;
+        this.w = 55;
+        this.h = 75;
 
         this.vx = 0;
         this.vy = 0;
@@ -116,5 +116,9 @@ class Player {
         if (code === KEY_BACKWARD) {
             this.vx = 0;
         }
+    }
+
+    collides(element){
+        
     }
 }
