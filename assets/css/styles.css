@@ -1,13 +1,26 @@
-#canvas-game {
-    border: 1px solid gray;   
+@font-face {
+    font-family: 'FlappyFont';
+    src: url('../fonts/flappyfont.eot');
+    /* IE9 Compat Modes */
+    src: url('../fonts/flappyfont.eot?#iefix') format('embedded-opentype'),
+        /* IE6-IE8 */
+        url('../fonts/flappyfont.woff') format('woff'),
+        /* Pretty Modern Browsers */
+        url('../fonts/flappyfont.ttf') format('truetype');
+    /* Safari, Android, iOS */
 }
 
-h1{
+
+#canvas-game {
+    border: 1px solid gray;
+}
+
+h1 {
     margin: 0;
     margin-bottom: 20px;
 }
 
-.game-container{
+.game-container {
     padding: 0;
     height: 100vh;
     margin: auto;
@@ -18,7 +31,7 @@ h1{
     position: relative;
 }
 
-.game-intro{
+.game-intro, .game-over {
     background-color: red;
     position: absolute;
     display: flex;
@@ -30,7 +43,11 @@ h1{
 
 }
 
+.game-over {
+    display: none;
+}
+
 * {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    
+    font-family: 'FlappyFont';
+
 }

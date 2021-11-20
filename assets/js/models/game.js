@@ -14,7 +14,7 @@ class Game {
 
         this.asteroidDrawCount = 0;
         this.asteroidDrawInterval = 350;
-
+        
         this.background = new Background(this.ctx);
         this.player = new Player(this.ctx, 150, 260);
         this.lava = new Lava(this.ctx);
@@ -22,7 +22,14 @@ class Game {
         this.bananas = [];
         this.asteroids = [];
 
+        this.livesCount = 3;
+
+        this.scoreIntervalId = undefined;
+
         this.lavaIncrease = 0;
+
+        this.score = 0;
+       
     }
 
 
@@ -34,7 +41,7 @@ class Game {
                 this.clear();
                 this.draw();
                 this.move();
-                const lavaFactor = (this.player.isMovingToRight > 0) ? 2000 : 0
+                const lavaFactor = (!this.player.isMovingToRight) ? 250 : 0;
 
                 if (this.lavaIncrease % lavaFactor === 0) {
                     this.lavaIncrease = 0;
@@ -54,14 +61,31 @@ class Game {
                     const randomX = Math.floor(Math.random() * this.ctx.canvas.width);
                     
                     this.asteroids.push(new Rock(this.ctx, randomX, 0, randomWidth, randomHeight));
-                }
+                }  
+                this.checkCollisions();
+
             }, this.fps);
+        }
+
+        if (!this.scoreIntervalId) {
+            this.scoreIntervalId = setInterval(() => {
+               this.score += 50;
+            }, 1000) 
+    
         }
     }
 
     stop() {
-        clearInterval(this.IntervalId);
-        this.IntervalId = undefined;
+        clearInterval(this.drawIntervalId);
+        this.drawIntervalId = undefined;
+        clearInterval(this.scoreIntervalId);
+        this.scoreIntervalId = undefined;
+    }
+
+    gameOver() {
+        this.stop();
+        const gameOverPannel = document.querySelector('.game-over');
+        gameOverPannel.style.display = 'block';
     }
 
     draw() {
@@ -75,6 +99,13 @@ class Game {
         this.bananas.forEach(banana => banana.draw());
 
         this.asteroids.forEach(asteroid => asteroid.draw());
+
+        this.ctx.save();
+        this.ctx.font = '30px FlappyFont';
+        this.ctx.fillSytle = 'black';
+        this.ctx.fillText(this.score, 10, 40);
+        this.ctx.restore();
+        
         
     }
 
@@ -102,7 +133,33 @@ class Game {
         this.player.onKeyUp(code);
     }
 
-    checkCollisions(){
+    checkCollisions() {
+        const asteroidCollision = this.asteroids.find(asteroid => this.player.collides(asteroid));
+        if (asteroidCollision) {
+            this.livesCount--;
+            this.asteroids = this.asteroids.filter(asteroid => {
+                return asteroidCollision != asteroid; // distinto
+            })
+        }
+
+        const bananaCollision = this.bananas.find(banana => this.player.collides(banana));
+        if (bananaCollision) {
+            this.lava.x -= 10;
+            this.bananas = this.bananas.filter(banana => {
+                return bananaCollision != banana;
+            })
+        }
+
+        const lavaCollision = this.player.collides(this.lava);
+        
+        if (lavaCollision) {
+            this.gameOver();
+        }
+
+        
+        
+
+
         
     }
 }

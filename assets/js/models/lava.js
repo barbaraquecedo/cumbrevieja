@@ -26,4 +26,6 @@ class Lava {
             this.ctx.drawImage(this.lavaImg, i * this.lavaImg.width, this.y, this.lavaImg.width, this.lavaImg.height);
         }
     }
+
+    
 }

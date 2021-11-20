@@ -9,8 +9,8 @@ class Player {
         this.y = y;
         this.y0 = y;
 
-        this.w = 55;
-        this.h = 75;
+        this.width= 55;
+        this.height = 75;
 
         this.vx = 0;
         this.vy = 0;
@@ -37,8 +37,8 @@ class Player {
             this.img.height,
             this.x, 
             this.y, 
-            this.w, 
-            this.h
+            this.width, 
+            this.height
             );
 
             this.drawCount++;
@@ -67,7 +67,7 @@ class Player {
         this.y += this.vy;
         this.vy += this.ay;
 
-        if(this.x + this.w >= this.ctx.canvas.width) {
+        if(this.x + this.width >= this.ctx.canvas.width) {
             this.vx =- this.vx;
         }
 
@@ -119,6 +119,9 @@ class Player {
     }
 
     collides(element){
-        
+        return this.x < element.x + element.width &&
+        this.x + this.width > element.x &&
+        this.y < element.y + element.height &&
+        this.y + this.height > element.y;
     }
 }
