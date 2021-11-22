@@ -10,6 +10,10 @@
     /* Safari, Android, iOS */
 }
 
+* {
+    font-family: 'FlappyFont';
+
+}
 
 #canvas-game {
     border: 1px solid gray;
@@ -17,7 +21,7 @@
 
 h1 {
     margin: 0;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .game-container {
@@ -32,8 +36,11 @@ h1 {
 }
 
 .game-intro, .game-over {
-    background-color: red;
     position: absolute;
+    background-image: url(file:///Users/barbaraquecedourtizberea/Desktop/webdev/labs/videojuego/cumbrevieja/assets/img/reload.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,11 +50,17 @@ h1 {
 
 }
 
-.game-over {
-    display: none;
+
+
+button {
+    padding: 10px;
+    font-size: 26px;
+
 }
 
-* {
-    font-family: 'FlappyFont';
-
+body {
+    background-image: url(file:///Users/barbaraquecedourtizberea/Desktop/webdev/labs/videojuego/cumbrevieja/assets/img/sea.jpeg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }

@@ -6,8 +6,11 @@ window.addEventListener('load', () => {
   
 
   const startButton = document.querySelector('#button-start');
+  const reloadButton = document.querySelector('#button-reload');
   const gameIntro = document.querySelector('.game-intro');
+  const gameOverIntro = document.querySelector('.game-over');
 
+  gameOverIntro.style.display = "none"
   document.addEventListener('keydown', (event) => {
     //ejecutar metodo onKeyDown del objeto game pasandole code
     game.onKeyDown(event.keyCode);
@@ -20,6 +23,10 @@ window.addEventListener('load', () => {
   startButton.addEventListener('click', () => {
     game.start();
     gameIntro.remove();
+  })
+
+  reloadButton.addEventListener('click', () => {
+    location.reload()
   })
 
 });

@@ -14,10 +14,14 @@ class Game {
 
         this.asteroidDrawCount = 0;
         this.asteroidDrawInterval = 350;
+        this.gameOverDiv = document.querySelector('.game-over');
+        this.gamePoints = document.querySelector('#score');
         
         this.background = new Background(this.ctx);
         this.player = new Player(this.ctx, 150, 260);
         this.lava = new Lava(this.ctx);
+        this.dodoLives = new DodoLives(this.ctx, 30, 40);
+
 
         this.bananas = [];
         this.asteroids = [];
@@ -41,7 +45,7 @@ class Game {
                 this.clear();
                 this.draw();
                 this.move();
-                const lavaFactor = (!this.player.isMovingToRight) ? 250 : 0;
+                const lavaFactor = (!this.player.isMovingToRight) ? 100 : 0;
 
                 if (this.lavaIncrease % lavaFactor === 0) {
                     this.lavaIncrease = 0;
@@ -85,7 +89,10 @@ class Game {
     gameOver() {
         this.stop();
         const gameOverPannel = document.querySelector('.game-over');
-        gameOverPannel.style.display = 'block';
+        gameOverPannel.style.display = 'flex';
+        this.gamePoints.innerHTML = this.score;
+        //this.ctx.fillText('Felicidades, has conseguido un montón de puntos', 10, 20);
+        //this.ctx.restore();
     }
 
     draw() {
@@ -105,6 +112,8 @@ class Game {
         this.ctx.fillSytle = 'black';
         this.ctx.fillText(this.score, 10, 40);
         this.ctx.restore();
+
+        this.dodoLives.draw();
         
         
     }
@@ -140,6 +149,10 @@ class Game {
             this.asteroids = this.asteroids.filter(asteroid => {
                 return asteroidCollision != asteroid; // distinto
             })
+        }
+
+        if (this.livesCount === 0) {
+            this.gameOver();
         }
 
         const bananaCollision = this.bananas.find(banana => this.player.collides(banana));
