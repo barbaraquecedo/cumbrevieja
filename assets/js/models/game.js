@@ -20,7 +20,7 @@ class Game {
         this.background = new Background(this.ctx);
         this.player = new Player(this.ctx, 150, 260);
         this.lava = new Lava(this.ctx);
-        this.dodoLives = new DodoLives(this.ctx, 30, 40);
+        //this.dodoLives = new DodoLives(this.ctx, 30, 40);
 
 
         this.bananas = [];
@@ -33,7 +33,9 @@ class Game {
         this.lavaIncrease = 0;
 
         this.score = 0;
-       
+
+        this.sound = document.querySelector('audio');
+           
     }
 
 
@@ -45,6 +47,7 @@ class Game {
                 this.clear();
                 this.draw();
                 this.move();
+                this.sound.play();
                 const lavaFactor = (!this.player.isMovingToRight) ? 100 : 0;
 
                 if (this.lavaIncrease % lavaFactor === 0) {
@@ -113,7 +116,7 @@ class Game {
         this.ctx.fillText(this.score, 10, 40);
         this.ctx.restore();
 
-        this.dodoLives.draw();
+        //this.dodoLives.draw();
         
         
     }
@@ -168,11 +171,33 @@ class Game {
         if (lavaCollision) {
             this.gameOver();
         }
-
-        
-        
-
-
-        
     }
+
+    sound(src) {
+        this.sound = document.createElement("audio");
+        this.sound.src = src;   
+        this.sound.setAttribute("preload", "auto");
+        this.sound.setAttribute("controls", "none");
+        this.sound.style.display = "none";
+        document.body.appendChild(this.sound); 
+        this.play = function(){
+          this.sound.play();
+        }
+        this.stop = function(){
+          this.sound.pause();
+        }
+      }
+    
+      //isAlive() {
+        //  if (this.livesCount === 3) {
+          //    this.img.draw();
+          //} if (this.livesCount === 2) {
+            //  this.img.draw();
+             //} if (this.)
+
+      //}
+
+      //decrease() {
+
+      //}
 }

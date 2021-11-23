@@ -7,7 +7,7 @@ class Rock {
 
         this.x = x;
         this.y = y;
-        this.vy = 0.6;
+        this.vy = 0.9;
 
         this.width = width;
         this.height = height;

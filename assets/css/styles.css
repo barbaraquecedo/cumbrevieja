@@ -37,7 +37,7 @@ h1 {
 
 .game-intro, .game-over {
     position: absolute;
-    background-image: url(file:///Users/barbaraquecedourtizberea/Desktop/webdev/labs/videojuego/cumbrevieja/assets/img/reload.png);
+    background-image: url(v/img/reload.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

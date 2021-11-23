@@ -25,7 +25,6 @@ class DodoLives {
             this.x, 
             this.y, 
             this.width, 
-            this.height
-            
+            this.height 
     }
 }
